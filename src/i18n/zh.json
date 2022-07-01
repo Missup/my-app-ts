@@ -1,0 +1,12 @@
+{
+    "header": {
+        "signin": "登录"
+    },
+    "home_page": {
+        "detail": "详情",
+        "commodity": "商品"
+    },
+    "footer": {
+        "content": "页脚"
+    }
+}

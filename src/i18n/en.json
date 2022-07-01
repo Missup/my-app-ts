@@ -1,0 +1,12 @@
+{
+    "header": {
+        "signin": "sign in"
+    },
+    "home_page": {
+        "detail": "detail",
+        "commodity": "commodity"
+    },
+    "footer": {
+        "content": "footer"
+    }
+}
