@@ -1,7 +1,7 @@
 import React from "react";
 // import logo from "./logo.svg";
 import "./App.css";
-// import Child from "./components/child";
+import Child from "./components/child";
 // import { Layout, Typography } from "antd";
 
 // const { Header, Footer, Sider, Content } = Layout;
@@ -19,8 +19,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/" element={<Child />} /> */}
           <Route path="/" element={<Home />} />
+          <Route path="/list" element={<Child />} />
           <Route path="/old" element={<Old />} />
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="*" element={<h1>404 not found 页面去火星了</h1>} />
