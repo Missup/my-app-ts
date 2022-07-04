@@ -10,8 +10,8 @@ import {
 } from "../redux/language/languageActions";
 
 const Header: React.FC = () => {
-  const language = useSelector((state) => state.language);
-  const languageList = useSelector((state) => state.languageList);
+  const language = useSelector((state) => state.language.language);
+  const languageList = useSelector((state) => state.language.languageList);
   //   const dispatch = useDispatch<Dispatch<LanguageActionTypes>>();
   const dispatch = useDispatch();
 
