@@ -19,12 +19,10 @@ const mapStateToProps = (state: RootState) => {
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     changeLanguage: (code: "zh" | "en") => {
-      const action = changeLanguageActionCreator(code);
-      dispatch(action);
+      dispatch(changeLanguageActionCreator(code));
     },
     addLanguage: (name: string, code: string) => {
-      const action = addLanguageActionCreator(name, code);
-      dispatch(action);
+      dispatch(addLanguageActionCreator(name, code));
     },
   };
 };

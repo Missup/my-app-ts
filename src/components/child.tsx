@@ -32,18 +32,30 @@ const Child = () => {
     // };
     // fetchData();
 
-    setLoading(true);
-    axios.get("https://jsonplaceholder.typicode.com/users").then((res) => {
-      // console.log('res', res);
-      if (res.status === 200) {
-        setList(res.data);
+    const getData = async () => {
+      setLoading(true);
+      try {
+        const { data } = await axios.get(
+          "https://jsonplaceholder.typicode.com/users"
+        );
+        setList(data);
+      } catch (error) {
+        if (error instanceof Error) {
+          setErrorMsg(error.message);
+        }
       }
       setLoading(false);
-    });
+    };
 
-    // fetch("https://jsonplaceholder.typicode.com/users")
-    //   .then((response) => response.json())
-    //   .then((json) => console.log(json));
+    getData();
+
+    // axios.get("https://jsonplaceholder.typicode.com/users").then((res) => {
+    //   // console.log('res', res);
+    //   if (res.status === 200) {
+    //     setList(res.data);
+    //   }
+    //   setLoading(false);
+    // });
   }, []);
 
   const handleClick = () => {
