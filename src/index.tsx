@@ -6,7 +6,8 @@ import reportWebVitals from "./reportWebVitals";
 import "antd/dist/antd.min.css";
 import "./i18n/config";
 import { Provider } from "react-redux";
-import store from "./redux/store";
+import rootStore from "./redux/store";
+import { PersistGate } from "redux-persist/integration/react";
 // import axios from "axios";
 
 // axios.defaults.headers['x-icode'] = '';
@@ -15,8 +16,10 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <Provider store={store}>
-    <App />
+  <Provider store={rootStore.store}>
+    <PersistGate persistor={rootStore.persistor}>
+      <App />
+    </PersistGate>
   </Provider>
 );
 // root.render(

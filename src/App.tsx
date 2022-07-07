@@ -13,6 +13,15 @@ import Detail from "./components/detail";
 import Old from "./components/old";
 import Home from "./components/home";
 // import Page from "./components/page";
+import ShoppingCart from "./components/shoppingCart";
+import { useSelector } from "./redux/hooks";
+import { Navigate } from "react-router-dom";
+import PlaceOrder from "./components/placeOrder";
+
+const PrivateRoute = ({ children }) => {
+  const jwt = useSelector((state) => state.user.token);
+  return jwt ? children : <Navigate to="/signin" />;
+};
 
 function App() {
   return (
@@ -23,6 +32,22 @@ function App() {
           <Route path="/list" element={<Child />} />
           <Route path="/old" element={<Old />} />
           <Route path="/detail/:id" element={<Detail />} />
+          <Route
+            path="/shoppingcart"
+            element={
+              <PrivateRoute>
+                <ShoppingCart />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/placeorder"
+            element={
+              <PrivateRoute>
+                <PlaceOrder />
+              </PrivateRoute>
+            }
+          />
           <Route path="*" element={<h1>404 not found 页面去火星了</h1>} />
         </Routes>
       </BrowserRouter>

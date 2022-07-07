@@ -5,13 +5,29 @@ import recommendProductsReducer from "./recommendProducts/recommendProductsReduc
 import { actionLog } from "./middlewares/actionLog";
 import { changeLanguageMiddleware } from "./middlewares/changeLanguage";
 import { productDetailSlice } from "./productDetail/slice";
+import { userSlice } from "./user/slice";
+import { shoppingCartSlice } from "./shoppingCart/slice";
+import { orderSlice } from "./order/slice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+
+const persistConfig = {
+  key: "root",
+  storage,
+  whitelist: ["user"],
+};
 
 const rootReducer = combineReducers({
   language: languageReducer,
   recommendProducts: recommendProductsReducer,
   productDetail: productDetailSlice.reducer,
+  user: userSlice.reducer,
+  shoppingCart: shoppingCartSlice.reducer,
+  order: orderSlice.reducer,
 });
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // const store = createStore(
 //   rootReducer,
@@ -19,13 +35,17 @@ const rootReducer = combineReducers({
 // );
 
 const store = configureStore({
-  reducer: rootReducer,
+  // reducer: rootReducer,
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(actionLog, changeLanguageMiddleware),
   devTools: true,
 });
 
+const persistor = persistStore(store);
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export default store;
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { store, persistor };
